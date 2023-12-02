@@ -6,6 +6,7 @@ namespace CV_templateDotNet.Models
 {
     public class Project
     {
+        public int Id { get; set; }
         [Column(TypeName = "nchar(50)")]
         [DisplayName("İsim")]
         [Required(ErrorMessage = "Bu alan zorunludur.")]
@@ -19,7 +20,7 @@ namespace CV_templateDotNet.Models
 
         [Column(TypeName = "image")]
         [DisplayName("Resim")]
-        public ICollection<ImagePath> Image { get; set; }
+        public ICollection<ImagePath>? Images { get; set; }
         [Column(TypeName = "nchar(20)")]
         [DisplayName("Proje Tipi")]
         [Required(ErrorMessage = "Bu alan zorunludur.")]
@@ -35,5 +36,9 @@ namespace CV_templateDotNet.Models
         [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }
         public string? GithubUrl { get; set; } = default;
+
+        [NotMapped]
+        [DisplayName("Resim")]
+        public ICollection<IFormFile>? ImageSave { get; set; }
     }
 }

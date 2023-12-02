@@ -1,5 +1,7 @@
-﻿using CV_templateDotNet.Models;
+﻿using CV_templateDotNet.Data;
+using CV_templateDotNet.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace CV_templateDotNet.Controllers
@@ -7,20 +9,22 @@ namespace CV_templateDotNet.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+       
+        private readonly CVtemplateDotNetContext _context;
+        public HomeController(ILogger<HomeController> logger,CVtemplateDotNetContext context)
         {
             _logger = logger;
+            _context = context;
         }
         public IActionResult ThemUI() 
         {
-            return View(); 
+            return View();
         }
 
         public IActionResult Index()
         {
             return View();
-        }
+         }
 
         public IActionResult Privacy()
         {

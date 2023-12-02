@@ -14,6 +14,19 @@ namespace CV_templateDotNet.Data
         {
         }
 
-        public DbSet<CV_templateDotNet.Models.User> User { get; set; } = default!;
+        public DbSet<User> User { get; set; } = default!;
+        public DbSet<Education> Educations { get; set; } = default!;
+        public DbSet<ImagePath> ImagePaths { get; set; } = default!;
+        public DbSet<NetworkReferances> NetworkReferances { get; set; } = default!;
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Skill> Skills { get; set; } = default!;
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ImagePath>()
+                .HasOne(c => c.Project)
+                .WithMany(d => d.Images)
+                .HasForeignKey(c => c.PojectId);
+        }
     }
+
 }
