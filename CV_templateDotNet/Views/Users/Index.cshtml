@@ -35,7 +35,7 @@
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Images)
+                @Html.DisplayNameFor(model => model.ProfilImage)
             </th>
             <th></th>
         </tr>
@@ -65,7 +65,15 @@
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Images)
+
+             
+                        @if (item.ProfilImage != null)                            
+                            {
+                        <img src="~/@item.ProfilImage.CvImagePath" alt="Profil Fotoğrafı" width="300" />
+                               
+                            }
+
+                
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

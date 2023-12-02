@@ -26,6 +26,7 @@ namespace CV_templateDotNet.Data
                 .HasOne(c => c.Project)
                 .WithMany(d => d.Images)
                 .HasForeignKey(c => c.PojectId);
+
         }
     }
 

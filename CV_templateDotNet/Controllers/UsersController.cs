@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CV_templateDotNet.Data;
 using CV_templateDotNet.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CV_templateDotNet.Controllers
 {
@@ -23,7 +24,7 @@ namespace CV_templateDotNet.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.User != null ? 
-                          View(await _context.User.ToListAsync()) :
+                          View(await _context.User.Include(a=>a.ProfilImage).ToListAsync()) :
                           Problem("Entity set 'CVtemplateDotNetContext.User'  is null.");
         }
 
@@ -56,10 +57,21 @@ namespace CV_templateDotNet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserName,NameSurname,BirthDate,Email,Password,Address,PhoneNumber,Images")] User user)
+        public async Task<IActionResult> Create(User user)
         {
             if (ModelState.IsValid)
             {
+                if (user.Image != null)
+                {
+                    string imageExtension = Path.GetExtension(user.Image.FileName);
+                    string imageName = Guid.NewGuid() + imageExtension;
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/images/{imageName}");
+                    using var stream = new FileStream(path, FileMode.Create);
+                    await user.Image.CopyToAsync(stream);
+                    user.ProfilImage = new() { CvImagePath = $"images/{imageName}" };
+                    
+                }
+                
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

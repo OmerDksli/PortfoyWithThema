@@ -4,6 +4,7 @@ using CV_templateDotNet.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CV_templateDotNet.Migrations
 {
     [DbContext(typeof(CVtemplateDotNetContext))]
-    partial class CVtemplateDotNetContextModelSnapshot : ModelSnapshot
+    [Migration("20231202232557_mig_v4.01")]
+    partial class mig_v401
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

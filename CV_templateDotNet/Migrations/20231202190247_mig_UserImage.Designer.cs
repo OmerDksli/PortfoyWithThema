@@ -4,6 +4,7 @@ using CV_templateDotNet.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CV_templateDotNet.Migrations
 {
     [DbContext(typeof(CVtemplateDotNetContext))]
-    partial class CVtemplateDotNetContextModelSnapshot : ModelSnapshot
+    [Migration("20231202190247_mig_UserImage")]
+    partial class mig_UserImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,19 +73,12 @@ namespace CV_templateDotNet.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PojectId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
+                    b.Property<int>("PojectId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PojectId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("ImagePaths");
                 });
@@ -211,12 +207,17 @@ namespace CV_templateDotNet.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("char(10)");
 
+                    b.Property<int?>("ProfilImageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfilImageId");
 
                     b.ToTable("User");
                 });
@@ -225,25 +226,25 @@ namespace CV_templateDotNet.Migrations
                 {
                     b.HasOne("CV_templateDotNet.Models.Project", "Project")
                         .WithMany("Images")
-                        .HasForeignKey("PojectId");
-
-                    b.HasOne("CV_templateDotNet.Models.User", "User")
-                        .WithOne("ProfilImage")
-                        .HasForeignKey("CV_templateDotNet.Models.ImagePath", "UserId");
+                        .HasForeignKey("PojectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Project");
+                });
 
-                    b.Navigation("User");
+            modelBuilder.Entity("CV_templateDotNet.Models.User", b =>
+                {
+                    b.HasOne("CV_templateDotNet.Models.ImagePath", "ProfilImage")
+                        .WithMany()
+                        .HasForeignKey("ProfilImageId");
+
+                    b.Navigation("ProfilImage");
                 });
 
             modelBuilder.Entity("CV_templateDotNet.Models.Project", b =>
                 {
                     b.Navigation("Images");
-                });
-
-            modelBuilder.Entity("CV_templateDotNet.Models.User", b =>
-                {
-                    b.Navigation("ProfilImage");
                 });
 #pragma warning restore 612, 618
         }

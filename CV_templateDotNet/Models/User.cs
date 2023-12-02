@@ -53,10 +53,9 @@ namespace CV_templateDotNet.Models
         [NotMapped]
         [DisplayName("Resim")]
         public IFormFile? Image { get; set; }
-        [Column(TypeName = "char(100)")]
-        [DisplayName("Resim Dosyası Yolu")]
-        [Required(ErrorMessage = "Bu alan zorunludur.")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "En fazla 100, en az 3 karakter")]
-        public string Images { get; set; }
+
+        
+        [DisplayName("Profil Resmi")]          
+        public ImagePath? ProfilImage { get; set; }
     }
 }
