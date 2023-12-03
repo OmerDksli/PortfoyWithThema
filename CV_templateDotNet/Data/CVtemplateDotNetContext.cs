@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using CV_templateDotNet.Models;
-
+using System.IO;
 namespace CV_templateDotNet.Data
 {
     public class CVtemplateDotNetContext : DbContext
@@ -25,9 +21,14 @@ namespace CV_templateDotNet.Data
             modelBuilder.Entity<ImagePath>()
                 .HasOne(c => c.Project)
                 .WithMany(d => d.Images)
-                .HasForeignKey(c => c.PojectId);
+            .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<ImagePath>()
+                .HasOne(c => c.User)
+                .WithMany(d => d.ProfilImage)
+            .OnDelete(DeleteBehavior.Cascade);
 
         }
+        
     }
 
 }

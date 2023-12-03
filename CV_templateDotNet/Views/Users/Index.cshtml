@@ -69,8 +69,12 @@
              
                         @if (item.ProfilImage != null)                            
                             {
-                        <img src="~/@item.ProfilImage.CvImagePath" alt="Profil Fotoğrafı" width="300" />
-                               
+                        
+                        @foreach (var photoPath in item.ProfilImage)
+                        {
+                            <img src="~/@photoPath.CvImagePath" alt="proje fotoğrafları" width="300" />
+                                                       
+                        }
                             }
 
                 

@@ -52,10 +52,10 @@ namespace CV_templateDotNet.Models
         public  string PhoneNumber { get ; set ; }
         [NotMapped]
         [DisplayName("Resim")]
-        public IFormFile? Image { get; set; }
+        public ICollection<IFormFile>? Image { get; set; }
 
         
         [DisplayName("Profil Resmi")]          
-        public ImagePath? ProfilImage { get; set; }
+        public ICollection<ImagePath>? ProfilImage { get; set; }
     }
 }

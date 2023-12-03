@@ -60,11 +60,13 @@
             </td>
             <td>
                     @if(item.Images!=null)
+                    {
                         @foreach(var photoPath in item.Images)
                         {
                             <img src="~/@photoPath.CvImagePath" alt="proje fotoğrafları" width="300" />
                             @* @Html.DisplayFor(modelItem =>photoPath.CvImagePath)                             *@
                         }
+                    }
                 
             </td>
 
