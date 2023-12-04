@@ -28,7 +28,49 @@ namespace CV_templateDotNet.Data
             .OnDelete(DeleteBehavior.Cascade);
 
         }
-        
+
+        //changeTracker mekanizması ile silinme durumundakki imagePath tablosunun verilerine erişir
+        public void BeforeSaveChanges()
+        {
+            var deletedProject = ChangeTracker.Entries<Project>()               
+                .FirstOrDefault(e => e.State == EntityState.Deleted);
+            var deletedUser = ChangeTracker.Entries<User>()               
+                .FirstOrDefault(e => e.State == EntityState.Deleted);
+            List<ImagePath> deletedImages = new List<ImagePath>();
+             if(deletedProject != null)
+            {
+                var deletedProjectId = deletedProject.Entity.Id;
+                deletedImages=ImagePaths.Where(id=>id.PojectId== deletedProjectId).ToList();
+            }
+            else if (deletedUser != null)
+            {
+                var deletedUserId = deletedUser.Entity.Id;
+                deletedImages = ImagePaths.Where(id => id.UserId == deletedUserId).ToList();
+            }   
+
+             foreach (var imagePath in deletedImages) 
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/{imagePath.CvImagePath}");
+                File.Delete(path);
+            }
+                // Deleted durumundaki varlık hakkında bilgileri alabilirsiniz
+                //int id = deletedEntity.Id;
+                // Diğer özelliklere erişim sağlayabilirsiniz
+                //File.Delete($"~/{deletedEntity.CvImagePath}");
+                //Console.WriteLine($"~/{deletedEntity.}");
+            
+        }
+        public override int SaveChanges()
+        {
+            BeforeSaveChanges();
+            return base.SaveChanges();
+        }
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+            BeforeSaveChanges();
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+
     }
 
 }

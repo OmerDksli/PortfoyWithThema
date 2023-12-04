@@ -1,4 +1,4 @@
-﻿
+﻿@model CV_templateDotNet.Controllers.MyCollections
 @{
     Layout = null;
 }
@@ -117,7 +117,16 @@ https://templatemo.com/tm-578-first-portfolio
 
                         <div class="col-lg-5 col-12 position-relative">
                             <div class="hero-image-wrap"></div>
-                        <img src="~/templatemo_578_first_portfolio/images/portrait-happy-excited-man-holding-laptop-computer.png" class="hero-image img-fluid" alt="">
+
+                        @foreach(var item in Model.Users){
+                            @if(item.ProfilImage!=null){
+                            @foreach (var profil in item.ProfilImage){
+                                    <img src="~/@profil.CvImagePath" class="hero-image img-fluid" alt="">
+                            break; }}
+                            break;
+
+                        }
+                        
                         </div>
 
                     </div>
@@ -165,28 +174,31 @@ https://templatemo.com/tm-578-first-portfolio
                                 <div class="profile-title">
                                     <h4 class="mb-0">Information</h4>
                                 </div>
-
-                                <div class="profile-body">
+                                @foreach(var item in Model.Users)
+                            {<div class="profile-body">
                                     <p>
-                                        <span class="profile-small-title">Name</span> 
-                                        <span>Joshua Morgan</span>
+                                        <span class="profile-small-title">Adı</span> 
+                                        <span>@item.NameSurname</span>
                                     </p>
 
                                     <p>
-                                        <span class="profile-small-title">Birthday</span> 
-                                        <span>Aug 12, 1986</span>
+                                        <span class="profile-small-title">Doğum Günü</span> 
+                                        <span>@item.BirthDate</span>
                                     </p>
 
                                     <p>
                                         <span class="profile-small-title">Phone</span> 
-                                         <span><a href="tel: 305-240-9671">120-240-9600</a></span>
+                                         <span><a href="tel: 305-240-9671">@item.PhoneNumber</a></span>
                                     </p>
 
                                     <p>
                                         <span class="profile-small-title">Email</span> 
-                                        <span><a href="mailto:hello@josh.design">hello@josh.design</a></span>
+                                        <span><a href="mailto:@item.Email">hello@josh.design</a></span>
                                     </p>
                                 </div>
+                                break;
+                            }
+                            
                             </div>
                         </div>
 
@@ -373,20 +385,32 @@ https://templatemo.com/tm-578-first-portfolio
                         </div>
 
                         <div class="clearfix"></div>
-
+                        @foreach(var item in Model.Projects)
+                        {
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="projects-thumb">
                                 <div class="projects-info">
-                                    <small class="projects-tag">Branding</small>
+                                    <small class="projects-tag">@item.ProjectType</small>
 
-                                    <h3 class="projects-title">Zoik agency</h3>
+                                    <h3 class="projects-title">@item.ProjectName</h3>
                                 </div>
+                                    @if (item.Images != null)
+                                    {
+                                        @foreach (var photoPath in item.Images)
+                                        {
+                                            
 
-                            <a href="~/templatemo_578_first_portfolio/images/projects/nikhil-KO4io-eCAXA-unsplash.jpg" class="popup-image">
-                                <img src="~/templatemo_578_first_portfolio/images/projects/nikhil-KO4io-eCAXA-unsplash.jpg" class="projects-image img-fluid" alt="">
-                                </a>
+                                                <a href="~/@photoPath.CvImagePath" class="popup-image">
+                                           
+                                                    <img src="~/@photoPath.CvImagePath" class="projects-image img-fluid" alt="">
+                                        </a>
+                                        break;
+
+                                        }
+                                    }
                             </div>
                         </div>
+                    }
 
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="projects-thumb">

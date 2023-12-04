@@ -4,6 +4,7 @@ using CV_templateDotNet.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CV_templateDotNet.Migrations
 {
     [DbContext(typeof(CVtemplateDotNetContext))]
-    partial class CVtemplateDotNetContextModelSnapshot : ModelSnapshot
+    [Migration("20231204174533_mig_v6")]
+    partial class mig_v6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,12 +76,15 @@ namespace CV_templateDotNet.Migrations
                     b.Property<int?>("PojectId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PojectId");
+                    b.HasIndex("ProjectId");
 
                     b.HasIndex("UserId");
 
@@ -223,7 +229,7 @@ namespace CV_templateDotNet.Migrations
                 {
                     b.HasOne("CV_templateDotNet.Models.Project", "Project")
                         .WithMany("Images")
-                        .HasForeignKey("PojectId")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CV_templateDotNet.Models.User", "User")

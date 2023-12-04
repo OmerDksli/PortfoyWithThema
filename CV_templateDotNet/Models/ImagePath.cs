@@ -5,6 +5,7 @@ namespace CV_templateDotNet.Models
     public class ImagePath
     {
         public int Id { get; set; }
+        [ForeignKey(nameof(Project))]
         public int? PojectId { get; set; }
         [ForeignKey(nameof(User))]
         public int? UserId { get; set; }
