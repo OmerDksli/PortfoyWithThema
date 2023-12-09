@@ -67,20 +67,13 @@ namespace CV_templateDotNet.Controllers
                 {
                     foreach (var item in project.ImageSave)
                     {
-                        #region Bu dosya içerisine gelen resim dosyası işlemlerden geçerek kaydedilir
-
-                        string imageExtension = Path.GetExtension(item.FileName);
-                        string imageName = Guid.NewGuid() + imageExtension;
-                        string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/images/{imageName}");
-                        using var stream = new FileStream(path, FileMode.Create);
-                        await item.CopyToAsync(stream);
-                        #endregion
-                        /*CvImagePath properity sine resmin kayıt yolu path üzerinden kayedilmedi çünkü
-                         * Kendi cihazımda resim eklerken bu cihazda ki resim dosya yolu kayıt edilir 
-                         * ve kullanma esnasında sorun yaşanırdı. Böylece dosya yolu cihazdan bağımsız Olarak 
-                         * sadece tilda işareti ile wwwRoot içerisinden Kullanılabilir 
-                        */
-                        ImagePath imageWay = new() { CvImagePath = $"images/{imageName}", Project = project };
+                        
+                        ///*CvImagePath properity sine resmin kayıt yolu path üzerinden kayedilmedi çünkü
+                        // * Kendi cihazımda resim eklerken bu cihazda ki resim dosya yolu kayıt edilir 
+                        // * ve kullanma esnasında sorun yaşanırdı. Böylece dosya yolu cihazdan bağımsız Olarak 
+                        // * sadece tilda işareti ile wwwRoot içerisinden Kullanılabilir 
+                        //*/
+                        ImagePath imageWay = new(item) { Project = project };
                         await _context.AddAsync(imageWay);
                     }
                 }

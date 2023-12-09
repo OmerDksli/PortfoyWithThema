@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "ImageEdit";
+}
+<h1>@ViewData["Title"]</h1>
+
+@model CV_templateDotNet.Models.ImagePath
+
+
+
+<h1>Edit</h1>
+
+<h4>Project</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ImageEdit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PojectId" class="control-label"></label>
+                <input asp-for="PojectId" class="form-control" />
+                <span asp-validation-for="PojectId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="CvImagePath" class="form-control" />
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" accept="image/*" />
+                @if (Model.CvImagePath!=null){
+                 <img src="~/@Model.CvImagePath.ToString()" alt="proje fotoğrafları" width="300" />
+                }
+                
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

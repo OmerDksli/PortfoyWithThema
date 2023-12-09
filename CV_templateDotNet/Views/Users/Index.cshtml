@@ -80,7 +80,9 @@
                         
                         @foreach (var photoPath in item.ProfilImage)
                         {
+                            <a asp-controller="Home" asp-action="ImageEdit" asp-route-id="@photoPath.Id">
                             <img src="~/@photoPath.CvImagePath" alt="proje fotoğrafları" width="300" />
+                            </a>
                                                        
                         }
                             }
