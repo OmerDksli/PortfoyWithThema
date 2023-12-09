@@ -52,8 +52,8 @@ https://templatemo.com/tm-578-first-portfolio
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <a href="index.html" class="navbar-brand mx-auto mx-lg-0">First</a>
+            <a asp-action="Index" class="navbar-brand mx-auto mx-lg-0">Kontrol Paneli</a>
+                
 
                 <div class="d-flex align-items-center d-lg-none">
                     <i class="navbar-icon bi-telephone-plus me-3"></i>
@@ -65,30 +65,30 @@ https://templatemo.com/tm-578-first-portfolio
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-5">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_1">Home</a>
+                            <a class="nav-link click-scroll" href="#section_1">Anasayfa</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_2">About</a>
+                            <a class="nav-link click-scroll" href="#section_2">Beni Tanı</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_3">Services</a>
+                            <a class="nav-link click-scroll" href="#section_3">Referanslar</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_4">Projects</a>
+                            <a class="nav-link click-scroll" href="#section_4">Projeler</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_5">Contact</a>
+                            <a class="nav-link click-scroll" href="#section_5">İletişim</a>
                         </li>
                     </ul>
 
                     <div class="d-lg-flex align-items-center d-none ms-auto">
                         <i class="navbar-icon bi-telephone-plus me-3"></i>
                         <a class="custom-btn btn" href="#section_5">
-                            120-240-9600
+                            @("0"+Model.Users.FirstOrDefault().PhoneNumber)
                         </a>
                     </div>
                 </div>
@@ -105,27 +105,27 @@ https://templatemo.com/tm-578-first-portfolio
                         <div class="col-lg-7 col-12">
                             <div class="hero-text">
                                 <div class="hero-title-wrap d-flex align-items-center mb-4">
-                                <img src="~/templatemo_578_first_portfolio/images/happy-bearded-young-man.jpg" class="avatar-image avatar-image-large img-fluid" alt="">
+                                <img src="~/@Model.Users.FirstOrDefault().ProfilImage.FirstOrDefault().CvImagePath" class="avatar-image avatar-image-large img-fluid" alt="">
 
-                                    <h1 class="hero-title ms-3 mb-0">Hello friend!</h1>
+                                    <h1 class="hero-title ms-3 mb-0">Yazılım Mühendisi</h1>
                                 </div>
 
-                                <h2 class="mb-4">I’m available for freelance work.</h2>
-                                <p class="mb-4"><a class="custom-btn btn custom-link" href="#section_2">Let's begin</a></p>
+                                <h2 class="mb-4">İş teklifleri için e posta veya telefon ile ulaşabilirsiniz</h2>
+                                <p class="mb-4"><a class="custom-btn btn custom-link" href="#section_5">Let's begin</a></p>
                             </div>
                         </div>
 
                         <div class="col-lg-5 col-12 position-relative">
                             <div class="hero-image-wrap"></div>
-
-                        @foreach(var item in Model.Users){
+                        <img src="~/@Model.Users.FirstOrDefault().ProfilImage.FirstOrDefault().CvImagePath" class="hero-image img-fluid" alt="">
+                        @* @foreach(var item in Model.Users){
                             @if(item.ProfilImage!=null){
                             @foreach (var profil in item.ProfilImage){
-                                    <img src="~/@profil.CvImagePath" class="hero-image img-fluid" alt="">
+                                   
                             break; }}
                             break;
 
-                        }
+                        } *@
                         
                         </div>
 
@@ -148,14 +148,14 @@ https://templatemo.com/tm-578-first-portfolio
                             <div class="about-thumb">
 
                                 <div class="section-title-wrap d-flex justify-content-end align-items-center mb-4">
-                                    <h2 class="text-white me-4 mb-0">My Story</h2>
+                                    <h2 class="text-white me-4 mb-0">Benim Hikayem</h2>
 
-                                <img src="~/templatemo_578_first_portfolio/images/happy-bearded-young-man.jpg" class="avatar-image img-fluid" alt="">
+                                <img src="~/@Model.Users.FirstOrDefault().ProfilImage.FirstOrDefault().CvImagePath" class="avatar-image img-fluid" alt="">
                                 </div>
 
                                 <h3 class="pt-2 mb-3">a little bit about Joshua</h3>
 
-                                <p>This one-page HTML portfolio is provided by <a href="https://templatemo.com" target="_blank">TemplateMo</a>. This layout is based on Bootstrap v5.1.3 CSS and JS libraries. Image credits go to <a href="https://unsplash.com" target="_blank">Unsplash</a> and <a href="https://freepik.com" target="_blank">FreePik</a> for images used in this page.</p>
+                                <p>@Model.Users.FirstOrDefault().MyStory</p>
 
                                 <p>You are allowed to use this template for your websites. You are not allowed to redistribute the template ZIP file on any other website. Please <a href="https://templatemo.com/contact" target="_blank">contact us</a> for more info.</p>
                             </div>
@@ -182,18 +182,18 @@ https://templatemo.com/tm-578-first-portfolio
                                     </p>
 
                                     <p>
-                                        <span class="profile-small-title">Doğum Günü</span> 
-                                        <span>@item.BirthDate</span>
+                                        <span class="profile-small-title">Doğum Günü</span>
+                                        <span>@String.Format("{0:D}", item.BirthDate)</span>
                                     </p>
 
                                     <p>
-                                        <span class="profile-small-title">Phone</span> 
-                                         <span><a href="tel: 305-240-9671">@item.PhoneNumber</a></span>
+                                        <span class="profile-small-title">Phone</span>
+                                        <span><a href="tel:@("0"+item.PhoneNumber)">@("0" + item.PhoneNumber)</a></span>
                                     </p>
 
                                     <p>
-                                        <span class="profile-small-title">Email</span> 
-                                        <span><a href="mailto:@item.Email">hello@josh.design</a></span>
+                                        <span class="profile-small-title">Email</span>
+                                        <span><a href="mailto:@item.Email">@item.Email</a></span>
                                     </p>
                                 </div>
                                 break;
@@ -206,21 +206,21 @@ https://templatemo.com/tm-578-first-portfolio
                             <div class="about-thumb">
                                 <div class="row">
                                     <div class="col-lg-6 col-6 featured-border-bottom py-2">
-                                        <strong class="featured-numbers">20+</strong>
+                                        <strong class="featured-numbers">10+</strong>
 
-                                        <p class="featured-text">Years of Experiences</p>
+                                        <p class="featured-text">Kişisel Kişisel Gelişim Semineri</p>
                                     </div>
 
                                     <div class="col-lg-6 col-6 featured-border-start featured-border-bottom ps-5 py-2">
-                                        <strong class="featured-numbers">245</strong>
+                                        <strong class="featured-numbers">3</strong>
 
-                                        <p class="featured-text">Happy Customers</p>
+                                        <p class="featured-text">.Net tabanlı web uygulaması</p>
                                     </div>
 
                                     <div class="col-lg-6 col-6 pt-4">
-                                        <strong class="featured-numbers">640</strong>
+                                        <strong class="featured-numbers">3</strong>
 
-                                        <p class="featured-text">Project Finished</p>
+                                        <p class="featured-text">Proje Bitti</p>
                                     </div>
 
                                     <div class="col-lg-6 col-6 featured-border-start ps-5 pt-4">
@@ -242,28 +242,22 @@ https://templatemo.com/tm-578-first-portfolio
                     <div class="row align-items-center">
 
                         <div class="col-lg-12 col-12">
-                            <h3 class="text-center mb-5">Companies I've had worked</h3>
+                            <h3 class="text-center mb-5">Yeteneklerim için referanslarım</h3>
                         </div>
 
-                        <div class="col-lg-2 col-4 ms-auto clients-item-height">
-                        <img src="~/templatemo_578_first_portfolio/images/clients/cachet.svg" class="clients-image img-fluid" alt="">
-                        </div>
+                    <div class="row">
+                        @foreach(var item in Model.NetworkReferances)
+                        {
+                            <div class="col-lg-12 col-12 featured-border-bottom py-2">
+                                <strong style="font-size:x-large" class="text-xl-start">@item.Name</strong>
 
-                        <div class="col-lg-2 col-4 clients-item-height">
-                        <img src="~/templatemo_578_first_portfolio/images/clients/guitar-center.svg" class="clients-image img-fluid" alt="">
-                        </div>
+                            <p class="featured-text">@item.Title</p>
+                        </div>                          
+                        }
+                        
 
-                        <div class="col-lg-2 col-4 clients-item-height">
-                        <img src="~/templatemo_578_first_portfolio/images/clients/tokico.svg" class="clients-image img-fluid" alt="">
-                        </div>
-
-                        <div class="col-lg-2 col-4 clients-item-height">
-                        <img src="~/templatemo_578_first_portfolio/images/clients/shopify.svg" class="clients-image img-fluid" alt="">
-                        </div>
-
-                        <div class="col-lg-2 col-4 me-auto clients-item-height">
-                        <img src="~/templatemo_578_first_portfolio/images/clients/profil-rejser.svg" class="clients-image img-fluid" alt="">
-                        </div>
+                        
+                    </div>
 
                     </div>
                 </div>
@@ -404,7 +398,7 @@ https://templatemo.com/tm-578-first-portfolio
                                            
                                                     <img src="~/@photoPath.CvImagePath" class="projects-image img-fluid" alt="">
                                         </a>
-                                        break;
+                      
 
                                         }
                                     }

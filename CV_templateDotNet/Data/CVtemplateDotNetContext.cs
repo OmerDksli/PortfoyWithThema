@@ -29,7 +29,8 @@ namespace CV_templateDotNet.Data
 
         }
 
-        //changeTracker mekanizması ile silinme durumundakki imagePath tablosunun verilerine erişir
+        #region changeTracker mekanizması ile silinme durumundakki imagePath tablosunun verilerine erişir
+        
         public void BeforeSaveChanges()
         {
             var deletedProject = ChangeTracker.Entries<Project>()               
@@ -60,6 +61,7 @@ namespace CV_templateDotNet.Data
                 //Console.WriteLine($"~/{deletedEntity.}");
             
         }
+        #endregion
         public override int SaveChanges()
         {
             BeforeSaveChanges();

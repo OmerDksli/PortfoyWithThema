@@ -111,7 +111,7 @@ namespace CV_templateDotNet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,NameSurname,BirthDate,Email,Password,Address,PhoneNumber,Images")] User user)
+        public async Task<IActionResult> Edit(int id,User user)
         {
             if (id != user.Id)
             {

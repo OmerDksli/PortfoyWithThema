@@ -24,4 +24,8 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BussinesLogicLayer\BussinesLogicLayer.csproj" />
+  </ItemGroup>
+
 </Project>

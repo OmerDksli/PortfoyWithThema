@@ -15,6 +15,10 @@ namespace CV_templateDotNet.Models
         [StringLength(50, MinimumLength = 2, ErrorMessage = "En fazla 50, en az 2 karakter")]
         public string UserName { get; set; } = "Admin";
 
+        [Column(TypeName ="nchar(500)")]
+        [DisplayName("Benim Hikayem")]
+        public string? MyStory { get; set; }
+
         [Column(TypeName = "nchar(50)")]
         [DisplayName("İsim")]
         [Required(ErrorMessage = "Bu alan zorunludur.")]
