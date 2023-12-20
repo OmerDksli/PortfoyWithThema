@@ -16,5 +16,10 @@ namespace CV_templateDotNet.Models
         [Required(ErrorMessage = "Bu alan zorunludur.")]
         [Range(0, 100, ErrorMessage = "0 - 100 arası yetenek seviyesi")]
         public byte SkillLevel { get; set; }
+        //[Column(TypeName = "nchar(250)")]
+        [DisplayName("Yeteneğin Kullanıldığı yer")]
+        //[Required(ErrorMessage = "Bu alan zorunludur.")]
+        //[StringLength(200, MinimumLength = 10, ErrorMessage = "En fazla 200, en az 10 karakter")]
+        public string? Description { get; set; }
     }
 }

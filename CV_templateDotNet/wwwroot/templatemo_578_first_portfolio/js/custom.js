@@ -10,7 +10,7 @@
 
     // CUSTOM LINK
     $('.custom-link').click(function(){
-    var el = $(this).attr('href');
+    var el = $(this).attr('asd');
     var elWrapped = $(el);
     var header_height = $('.navbar').height() + 10;
 

@@ -28,8 +28,10 @@
     <link href="~/templatemo_578_first_portfolio/css/magnific-popup.css" rel="stylesheet">
 
     <link href="~/templatemo_578_first_portfolio/css/templatemo-first-portfolio-style.css" rel="stylesheet">
-        
-<!--
+    <script>
+        var tester = [{ id:"", pathimage:"" }]
+    </script>
+    <!--
 
 TemplateMo 578 First Portfolio
 
@@ -272,22 +274,24 @@ https://templatemo.com/tm-578-first-portfolio
                             <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">
                             <img src="~/templatemo_578_first_portfolio/images/handshake-man-woman-after-signing-business-contract-closeup.jpg" class="avatar-image img-fluid" alt="">
 
-                                <h2 class="text-white ms-4 mb-0">Services</h2>
+                                <h2 class="text-white ms-4 mb-0">Yeteneklerim</h2>
                             </div>
 
                             <div class="row pt-lg-5">
+                            @foreach(var item in Model.Skills)
+                            {
                                 <div class="col-lg-6 col-12">
                                     <div class="services-thumb">
                                         <div class="d-flex flex-wrap align-items-center border-bottom mb-4 pb-3">
-                                            <h3 class="mb-0">Websites</h3>
+                                            <h3 class="mb-0">@item.Name</h3><br />
 
                                             <div class="services-price-wrap ms-auto">
-                                                <p class="services-price-text mb-0">$2,400</p>
+                                                <p class="services-price-text mb-0">Uzmanlık Seviyesi:%@item.SkillLevel</p>
                                                 <div class="services-price-overlay"></div>
                                             </div>
                                         </div>
 
-                                        <p>You may want to explore Too CSS for great collection of free HTML CSS templates.</p>
+                                        <p>@((item.Description != null)?item.Description.Remove(80):"yetenek Tanımı yok")...</p>
 
                                         <a href="#" class="custom-btn custom-border-btn btn mt-3">Discover More</a>
 
@@ -296,69 +300,11 @@ https://templatemo.com/tm-578-first-portfolio
                                         </div>
                                     </div>
                                 </div>
+                                
+                            }
+                            
 
-                                <div class="col-lg-6 col-12">
-                                    <div class="services-thumb services-thumb-up">
-                                        <div class="d-flex flex-wrap align-items-center border-bottom mb-4 pb-3">
-                                            <h3 class="mb-0">Branding</h3>
-
-                                            <div class="services-price-wrap ms-auto">
-                                                <p class="services-price-text mb-0">$1,200</p>
-                                                <div class="services-price-overlay"></div>
-                                            </div>
-                                        </div>
-
-                                        <p>You can explore more CSS templates on TemplateMo website by browsing through different tags.</p>
-
-                                        <a href="#" class="custom-btn custom-border-btn btn mt-3">Discover More</a>
-
-                                        <div class="services-icon-wrap d-flex justify-content-center align-items-center">
-                                            <i class="services-icon bi-lightbulb"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-12">
-                                    <div class="services-thumb">
-                                        <div class="d-flex flex-wrap align-items-center border-bottom mb-4 pb-3">
-                                            <h3 class="mb-0">Ecommerce</h3>
-
-                                            <div class="services-price-wrap ms-auto">
-                                                <p class="services-price-text mb-0">$3,600</p>
-                                                <div class="services-price-overlay"></div>
-                                            </div>
-                                        </div>
-
-                                        <p>If you need a customized ecommerce website for your business, feel free to discuss with me.</p>
-
-                                        <a href="#" class="custom-btn custom-border-btn btn mt-3">Discover More</a>
-
-                                        <div class="services-icon-wrap d-flex justify-content-center align-items-center">
-                                            <i class="services-icon bi-phone"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-12">
-                                    <div class="services-thumb services-thumb-up">
-                                        <div class="d-flex flex-wrap align-items-center border-bottom mb-4 pb-3">
-                                            <h3 class="mb-0">SEO</h3>
-
-                                            <div class="services-price-wrap ms-auto">
-                                                <p class="services-price-text mb-0">$1,450</p>
-                                                <div class="services-price-overlay"></div>
-                                            </div>
-                                        </div>
-
-                                        <p>To list your website first on any search engine, we will work together. First Portfolio is one-page CSS Template for free download.</p>
-
-                                        <a href="#" class="custom-btn custom-border-btn btn mt-3">Discover More</a>
-
-                                        <div class="services-icon-wrap d-flex justify-content-center align-items-center">
-                                            <i class="services-icon bi-google"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -389,16 +335,25 @@ https://templatemo.com/tm-578-first-portfolio
                                     <h3 class="projects-title">@item.ProjectName</h3>
                                 </div>
                                     @if (item.Images != null)
-                                    {
-                                        @foreach (var photoPath in item.Images)
+                                {bool status = true;
+
+                                    
+                                    @foreach (var photoPath in item.Images)
                                         {
                                             
-
-                                                <a href="~/@photoPath.CvImagePath" class="popup-image">
-                                           
-                                                    <img src="~/@photoPath.CvImagePath" class="projects-image img-fluid" alt="">
-                                        </a>
-                      
+                                        if(status)
+                                        {
+                                            status = false;
+                                            <a href="~/@photoPath.CvImagePath" class="popup-image">                                           
+                                                 <img src="~/@photoPath.CvImagePath" class="projects-image img-fluid" alt="">
+                                            </a>
+                                        }
+                                        else
+                                        {<script>
+                                            tester.push({ id: Number("@photoPath.Id"), pathimage: "@photoPath.CvImagePath" });
+                                        </script>
+                                            @* <a href="~/@photoPath.CvImagePath" class="popup-image" /> *@
+                                        }
 
                                         }
                                     }
@@ -622,6 +577,6 @@ https://templatemo.com/tm-578-first-portfolio
     <script src="~/templatemo_578_first_portfolio/js/jquery.magnific-popup.min.js"></script>
     <script src="~/templatemo_578_first_portfolio/js/magnific-popup-options.js"></script>
     <script src="~/templatemo_578_first_portfolio/js/custom.js"></script>
-
+    
     </body>
 </html>
