@@ -59,7 +59,7 @@ namespace CV_templateDotNet.Models
         public ICollection<IFormFile>? Image { get; set; }
 
         
-        [DisplayName("Profil Resmi")]          
+        [DisplayName("Profil Resmi")]
         public ICollection<ImagePath>? ProfilImage { get; set; }
     }
 }

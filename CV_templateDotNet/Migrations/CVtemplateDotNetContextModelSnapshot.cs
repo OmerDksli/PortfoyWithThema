@@ -55,7 +55,7 @@ namespace CV_templateDotNet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Educations");
+                    b.ToTable("Educations", (string)null);
                 });
 
             modelBuilder.Entity("CV_templateDotNet.Models.ImagePath", b =>
@@ -82,7 +82,7 @@ namespace CV_templateDotNet.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ImagePaths");
+                    b.ToTable("ImagePaths", (string)null);
                 });
 
             modelBuilder.Entity("CV_templateDotNet.Models.NetworkReferances", b =>
@@ -114,7 +114,7 @@ namespace CV_templateDotNet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("NetworkReferances");
+                    b.ToTable("NetworkReferances", (string)null);
                 });
 
             modelBuilder.Entity("CV_templateDotNet.Models.Project", b =>
@@ -153,7 +153,7 @@ namespace CV_templateDotNet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("CV_templateDotNet.Models.Skill", b =>
@@ -177,7 +177,7 @@ namespace CV_templateDotNet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Skills");
+                    b.ToTable("Skills", (string)null);
                 });
 
             modelBuilder.Entity("CV_templateDotNet.Models.User", b =>
@@ -226,7 +226,7 @@ namespace CV_templateDotNet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("CV_templateDotNet.Models.ImagePath", b =>
